@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Starter
 
-## Getting Started
+A batteries-included Next.js starter kit — pre-wired with TypeScript, Tailwind CSS, shadcn/ui, and dark mode — so you can skip the boilerplate and start building.
 
-First, run the development server:
+## Stack
+
+- **[Next.js](https://nextjs.org)** (App Router) + **TypeScript**
+- **[Tailwind CSS v4](https://tailwindcss.com)** (CSS-based config — see `app/globals.css`)
+- **[shadcn/ui](https://ui.shadcn.com)** — accessible components in `components/ui`
+- **[lucide-react](https://lucide.dev)** — icon set
+- **[next-themes](https://github.com/pacocoursey/next-themes)** — light/dark/system theming with no flash-of-incorrect-theme
+
+> [!NOTE]
+> This project pins a recent Next.js version whose APIs and conventions may differ from what you're used to (see `AGENTS.md`). When in doubt, check `node_modules/next/dist/docs/`.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app. Start editing `app/page.tsx` — it auto-updates as you save.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command             | Description                       |
+| ------------------- | --------------------------------- |
+| `pnpm dev`          | Start the dev server (Turbopack)  |
+| `pnpm build`        | Build for production              |
+| `pnpm start`        | Run the production build          |
+| `pnpm lint`         | Lint with ESLint                  |
+| `pnpm format`       | Format the codebase with Prettier |
+| `pnpm format:check` | Check formatting without writing  |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/                  Routes (App Router) — layout, page, global styles
+components/
+  ui/                 shadcn/ui primitives (Button, Card, Dialog, …)
+  layout/             Site shell — header, footer
+  demo/               Landing-page sections that showcase the kit
+  theme-provider.tsx  next-themes wrapper
+  theme-toggle.tsx    Light / dark / system switcher
+config/
+  site.ts             Site name, description, nav links — single source of truth
+hooks/
+  use-mobile.ts       Responsive breakpoint hook
+lib/
+  utils.ts            `cn()` class-name helper
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding more shadcn/ui components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dlx shadcn@latest add <component>
+```
 
-## Deploy on Vercel
+New components land in `components/ui` following the conventions already configured in `components.json`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Theming
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Colors, radii, and fonts are defined as CSS variables in `app/globals.css` (`:root` / `.dark`) and mapped into Tailwind via the `@theme` block — edit them there to restyle the whole app. The theme toggle in the header switches between light, dark, and system via [next-themes](https://github.com/pacocoursey/next-themes).
+
+## Deploy
+
+The easiest way to deploy is [Vercel](https://vercel.com/new). See the [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for other options.
